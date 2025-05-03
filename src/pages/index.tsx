@@ -26,7 +26,7 @@ export default function Home() {
       </Head>
       <div className={` ${rubikSans.variable} `}>
         <main>
-          <h1 className="text-3xl font-bold underline">Hello world!</h1>
+          <h1 className="text-3xl font-bold underline"> שלום עולם</h1>
         </main>
       </div>
     </>
