@@ -1,5 +1,8 @@
 import Head from "next/head";
 import { Rubik } from "next/font/google";
+import HeroSection from "@/sections/HeroSection/HeroSection";
+import { gsap } from "gsap";
+import { Physics2DPlugin } from "gsap/Physics2DPlugin";
 
 const rubikSans = Rubik({
   variable: "--font-rubik-sans",
@@ -7,6 +10,8 @@ const rubikSans = Rubik({
 });
 
 export default function Home() {
+  gsap.registerPlugin(Physics2DPlugin);
+
   return (
     <>
       <Head>
@@ -17,7 +22,7 @@ export default function Home() {
         />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1"
+          content="width=device-width, initial-scale=1 viewport-fit=cover"
         />
         <link
           rel="icon"
@@ -25,8 +30,9 @@ export default function Home() {
         />
       </Head>
       <div className={` ${rubikSans.variable} `}>
-        <main>
-          <h1 className="text-3xl font-bold underline"> שלום עולם</h1>
+        <main className="">
+          <HeroSection />
+          {/* <div className="w-screen h-screen bg-colorBrandPink500dark"></div> */}
         </main>
       </div>
     </>
