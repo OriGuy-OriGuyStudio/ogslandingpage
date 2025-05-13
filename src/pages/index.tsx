@@ -3,6 +3,14 @@ import { Rubik } from "next/font/google";
 import HeroSection from "@/sections/HeroSection/HeroSection";
 import { gsap } from "gsap";
 import { Physics2DPlugin } from "gsap/Physics2DPlugin";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect } from "react";
+import PainSection from "@/sections/painSection/PainSection";
+import ProblemSection from "@/sections/ProblemSection/ProblemSection";
+import LetsDoItSection from "@/sections/LetsDoItSection/LetsDoItSection";
+import WhyMeSection from "@/sections/WhyMeSection/WhyMeSection";
+import ContactMe from "@/sections/ContactMe/ContactMe";
 
 const rubikSans = Rubik({
   variable: "--font-rubik-sans",
@@ -10,7 +18,23 @@ const rubikSans = Rubik({
 });
 
 export default function Home() {
-  gsap.registerPlugin(Physics2DPlugin);
+  useEffect(() => {
+    // Register GSAP plugins only on the client side
+    gsap.registerPlugin(Physics2DPlugin, ScrollSmoother, ScrollTrigger);
+
+    // Create the ScrollSmoother instance
+    let smoother = ScrollSmoother.create({
+      wrapper: "#smooth-wrapper",
+      content: "#smooth-content",
+      smooth: 2,
+      smoothTouch: 2,
+    });
+
+    // Clean up on component unmount
+    return () => {
+      if (smoother) smoother.kill();
+    };
+  }, []);
 
   return (
     <>
@@ -29,10 +53,20 @@ export default function Home() {
           href="/favicon.ico"
         />
       </Head>
-      <div className={` ${rubikSans.variable} `}>
-        <main className="">
+      <div
+        id="smooth-wrapper"
+        className={` ${rubikSans.variable} `}
+      >
+        <main
+          id="smooth-content"
+          className=""
+        >
           <HeroSection />
-          {/* <div className="w-screen h-screen bg-colorBrandPink500dark"></div> */}
+          <PainSection />
+          <ProblemSection />
+          <LetsDoItSection />
+          <WhyMeSection />
+          <ContactMe />
         </main>
       </div>
     </>

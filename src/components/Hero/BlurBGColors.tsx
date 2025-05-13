@@ -1,7 +1,20 @@
+import { useGSAP } from "@gsap/react";
 import Image from "next/image";
-import React from "react";
+import { gsap } from "gsap";
 
 function BlurBGColors() {
+  useGSAP(() => {
+    gsap.from(".scale", {
+      opacity: 1,
+      duration: 1,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine",
+      stagger: {
+        each: 0.5,
+      },
+    });
+  });
   return (
     <>
       <Image
@@ -9,7 +22,7 @@ function BlurBGColors() {
         alt={"as"}
         width={60}
         height={60}
-        className="pointer-events-none absolute  inline size-96 md:size-[36rem]"
+        className=" scale z-0 pointer-events-none absolute  inline size-96 md:size-[36rem]"
         style={{ top: 0, left: 0 }}
       />
       <Image
@@ -19,7 +32,7 @@ function BlurBGColors() {
         height={20}
         loading="eager"
         fetchPriority="high"
-        className="pointer-events-none absolute  size-80 md:size-[36rem]"
+        className="scale z-0 pointer-events-none absolute  size-80 md:size-[36rem]"
         style={{ top: 0, right: 0 }}
       />
       <Image
@@ -29,7 +42,7 @@ function BlurBGColors() {
         height={20}
         loading="eager"
         fetchPriority="high"
-        className="pointer-events-none absolute   size-80 md:size-[36rem]"
+        className="scale z-0 pointer-events-none absolute   size-80 md:size-[36rem]"
         style={{ bottom: 0, left: 0 }}
       />
       <Image
@@ -39,7 +52,7 @@ function BlurBGColors() {
         loading="eager"
         fetchPriority="high"
         height={20}
-        className="pointer-events-none absolute  size-96 md:size-[36rem]"
+        className="scale z-0 pointer-events-none absolute  size-96 md:size-[36rem]"
         style={{ bottom: 0, right: 0 }}
       />
     </>

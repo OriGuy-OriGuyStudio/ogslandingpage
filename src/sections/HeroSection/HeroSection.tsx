@@ -1,9 +1,37 @@
+"use client";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import BlurBGColors from "@/components/Hero/BlurBGColors";
+import Image from "next/image";
 
 function HeroSection() {
   useGSAP(() => {
+    let posX = 0,
+      posY = 0;
+
+    let mouseX = 0,
+      mouseY = 0;
+
+    gsap.to(".customCurser", {
+      duration: 0.018,
+      repeat: -1,
+      onRepeat: function () {
+        posX += (mouseX - posX) / 8;
+        posY += (mouseY - posY) / 8;
+
+        gsap.set(".customCurser", {
+          css: {
+            left: posX - 1,
+            top: posY - 2,
+          },
+        });
+      },
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
     gsap.fromTo(
       ".titleToStagger",
       {
@@ -28,23 +56,37 @@ function HeroSection() {
   });
 
   return (
-    <section className="  overflow-x-clip   h-svh text-colorBrandWhiteYellow100light bg-colorBrandPurple900dark flex flex-col md:items-center justify-center px-4 md:px-20 ">
+    <section className="  relative overflow-x-hidden   h-svh text-colorBrandWhiteYellow100light bg-colorBrandPurple900dark flex flex-col md:items-center justify-center px-4 md:px-20 ">
+      <Image
+        src={"/fullLogoWhiteSVG.svg"}
+        alt={"logo"}
+        width={32}
+        height={32}
+        className="draw-me customCurser absolute top-10"
+      />
       <BlurBGColors />
 
       <p className=" titleToStagger  z-10 font-black text-right text-textsizebrandh6">
         לאתר שלך יש תפקיד אחד:
       </p>
-      <h1 className=" titleToStagger  z-10 font-black flex text-right flex-col md:text-center leading-none text-textsizebrandh2 md:text-textsizebrandh1">
+      <h1
+        style={{ textShadow: "1px 4px 8px #2a2a2a" }}
+        className=" titleToStagger   z-10 font-black flex text-right flex-col md:text-center leading-none text-textsizebrandh2 md:text-textsizebrandh1"
+      >
         לגרום לאנשים לעצור, להרגיש, ולהגיד
         <span className=" titleToStagger  z-10  text-colorBrandPink500dark inline-block">
           זה בדיוק מה שחיפשתי
         </span>
       </h1>
-      <p className=" titleToStagger  z-10 text-balance text-textsizebrandh5 font-light mt-2 md:w-2/4 leading-none text-right md:text-center">
+      <p
+        style={{ textShadow: "1px 4px 8px #2a2a2a" }}
+        className=" titleToStagger  z-10 text-balance text-textsizebrandh5 font-light mt-2 md:w-2/4 leading-none text-right md:text-center"
+      >
         אפיון, עיצוב ובניית אתרים לעסקים שמבינים שהאתר שלהם צריך לעבוד עבורם,
         להציג את הערך, לבלוט מהמתחרים ולייצר פניות.
       </p>
       <button
+        style={{ textShadow: "1px 4px 8px #2a2a2a" }}
         className=" titleToStagger  z-10 px-6 py-3 w-80 bg-colorBrandPink500dark active:ring-4 active:ring-colorBrandPurple500light duration-200 mt-8 text-textsizebrandh6 shadow-xl font-black rounded-xl"
         type="button"
       >
