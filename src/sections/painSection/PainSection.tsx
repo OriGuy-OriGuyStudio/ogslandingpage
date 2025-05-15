@@ -1,8 +1,9 @@
 import CtaPain from "@/components/pain/CtaPain";
+import { gsap } from "gsap";
 
 function PainSection() {
   return (
-    <section className=" z-20 h-svh grid grid-cols-4 lg:grid-cols-12 lg:items-center items-start content-center bg-colorBrandCyan500medium text-colorBrandGray800dark px-4 md:px-20">
+    <section className="   z-20 h-svh grid grid-cols-4 lg:grid-cols-12 lg:items-center items-start content-center bg-colorBrandCyan500medium text-colorBrandGray800dark px-4 md:px-20">
       <CtaPain />
       <div className="hidden lg:block lg:col-span-1"></div>
       <div className="mt-8 flex col-span-4 lg:col-span-7 flex-col items-center justify-center lg:justify-start lg:items-start  text-center lg:text-right text-textsizebrandh4 font-extrabold leading-none text-colorBrandGray800dark lg:text-textsizebrandh3">

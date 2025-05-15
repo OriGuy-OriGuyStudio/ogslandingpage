@@ -6,32 +6,6 @@ import Image from "next/image";
 
 function HeroSection() {
   useGSAP(() => {
-    let posX = 0,
-      posY = 0;
-
-    let mouseX = 0,
-      mouseY = 0;
-
-    gsap.to(".customCurser", {
-      duration: 0.018,
-      repeat: -1,
-      onRepeat: function () {
-        posX += (mouseX - posX) / 8;
-        posY += (mouseY - posY) / 8;
-
-        gsap.set(".customCurser", {
-          css: {
-            left: posX - 1,
-            top: posY - 2,
-          },
-        });
-      },
-    });
-
-    document.addEventListener("mousemove", (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
     gsap.fromTo(
       ".titleToStagger",
       {
@@ -60,9 +34,9 @@ function HeroSection() {
       <Image
         src={"/fullLogoWhiteSVG.svg"}
         alt={"logo"}
-        width={32}
-        height={32}
-        className="draw-me customCurser absolute top-10"
+        width={48}
+        height={48}
+        className="z-10 absolute top-10"
       />
       <BlurBGColors />
 
