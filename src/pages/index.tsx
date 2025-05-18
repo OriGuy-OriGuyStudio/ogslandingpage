@@ -4,13 +4,16 @@ import HeroSection from "@/sections/HeroSection/HeroSection";
 import { gsap } from "gsap";
 import { Physics2DPlugin } from "gsap/Physics2DPlugin";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
+import { JSX, useEffect, useLayoutEffect, useRef } from "react";
 import PainSection from "@/sections/painSection/PainSection";
 import ProblemSection from "@/sections/ProblemSection/ProblemSection";
 import LetsDoItSection from "@/sections/LetsDoItSection/LetsDoItSection";
 import WhyMeSection from "@/sections/WhyMeSection/WhyMeSection";
 import ContactMe from "@/sections/ContactMe/ContactMe";
+import { SplitText } from "gsap/all";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import GsapTraining from "@/GsapTraining";
 
 const rubikSans = Rubik({
   variable: "--font-rubik-sans",
@@ -18,9 +21,17 @@ const rubikSans = Rubik({
 });
 
 export default function Home() {
-  useEffect(() => {
+  let heroSectionRef = useRef<null | HTMLDivElement>(null);
+  let painSectionRef = useRef<null | HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
     // Register GSAP plugins only on the client side
-    gsap.registerPlugin(Physics2DPlugin, ScrollSmoother, ScrollTrigger);
+    gsap.registerPlugin(
+      Physics2DPlugin,
+      ScrollSmoother,
+      ScrollTrigger,
+      SplitText
+    );
 
     // Create the ScrollSmoother instance
     let smoother = ScrollSmoother.create({
@@ -29,12 +40,42 @@ export default function Home() {
       smooth: 2,
       smoothTouch: 2,
     });
-
+    console.log("scolltrigger init");
     // Clean up on component unmount
     return () => {
       if (smoother) smoother.kill();
+      console.log(" dismount");
     };
   }, []);
+
+  useGSAP(() => {
+    gsap.set(".heroTitlesContainer", {
+      rotate: 0,
+    });
+
+    gsap.to(".heroTitlesContainer", {
+      y: "25vh",
+      rotate: "4deg",
+      filter: "blur(2px)",
+      scale: 0.8,
+      scrollTrigger: {
+        trigger: ".heroTitlesContainer",
+        scrub: true,
+        markers: true,
+        start: "top 20%", // מתחיל רק כשהאלמנט נכנס לתוך הפריים
+        end: "bottom top", // אופציונלי – קובע מתי לסיים את הסקרוב
+      },
+    });
+    gsap.to(".pain", {
+      scrollTrigger: {
+        trigger: ".pain",
+        pin: true,
+        markers: true,
+        start: "top top",
+        end: "+=1000", // אלמנט יהיה תקוע לאורך 1000px של גלילה
+      },
+    });
+  });
 
   return (
     <>
@@ -55,12 +96,10 @@ export default function Home() {
       </Head>
       <div
         id="smooth-wrapper"
-        className={` ${rubikSans.variable} `}
+        className={` ${rubikSans.variable}  `}
       >
-        <main
-          id="smooth-content"
-          className=""
-        >
+        <main id="smooth-content">
+          {/* <GsapTraining /> */}
           <HeroSection />
           <PainSection />
           <ProblemSection />
