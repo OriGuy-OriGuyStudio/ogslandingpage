@@ -8,7 +8,7 @@ export default function Document() {
       className=""
     >
       <Head />
-      <body className=" bg-colorBrandGray800dark">
+      <body className="bg-colorBrandPurple500light ">
         <Main />
         <NextScript />
       </body>

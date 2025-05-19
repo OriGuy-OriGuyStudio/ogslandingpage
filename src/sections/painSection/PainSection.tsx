@@ -1,12 +1,40 @@
 import CtaPain from "@/components/pain/CtaPain";
+import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
-
+import { useRef } from "react";
+// gsap.registerPlugin(useGSAP);
 function PainSection() {
+  const textRef = useRef<null | HTMLDivElement>(null);
+
+  useGSAP(() => {
+    gsap.set(textRef.current, {
+      scale: 0,
+      opacity: 0,
+    });
+    gsap.to(textRef.current, {
+      scrollTrigger: {
+        trigger: ".pain",
+        markers: true,
+        start: "top 50%",
+        onEnter: () => {
+          gsap.to(textRef.current, {
+            scale: 1,
+            opacity: 1,
+            duration: 1.5,
+            delay: 3,
+          });
+        },
+      },
+    });
+  });
   return (
-    <section className=" pain  z-20 h-svh grid grid-cols-4 lg:grid-cols-12 lg:items-center items-start content-center bg-colorBrandCyan500medium text-colorBrandGray800dark px-4 md:px-20">
+    <section className=" pain relative z-20 h-lvh flex flex-col items-center justify-center  content-center  bg-colorBrandCyan500medium text-colorBrandGray800dark px-4 md:px-20">
       <CtaPain />
-      <div className="hidden lg:block lg:col-span-1"></div>
-      <div className="mt-8 flex col-span-4 lg:col-span-7 flex-col items-center justify-center lg:justify-start lg:items-start  text-center lg:text-right text-textsizebrandh4 font-extrabold leading-none text-colorBrandGray800dark lg:text-textsizebrandh3">
+
+      <div
+        ref={textRef}
+        className="mt-8  flex flex-col items-center justify-center    text-center lg:text-right text-textsizebrandh4 font-extrabold leading-none text-colorBrandGray800dark lg:text-textsizebrandh3"
+      >
         <h2 className=" text-textsizebrandh2 font-black md:text-textsizebrandh2 lg:text-textsizebrandh2">
           רוב{" "}
           <span
@@ -17,7 +45,7 @@ function PainSection() {
           </span>{" "}
           נראים טוב.
         </h2>
-        <h3 className="mb-2 text-textsizebrandh5 font-bold leading-none sm:w-[60%]">
+        <h3 className="mb-2 text-textsizebrandh5 font-bold text-center leading-none sm:w-[60%]">
           אבל הם לא מספרים את{" "}
           <span
             style={{ textShadow: "0px 4px 8px rgba(0, 0, 0, 0.10)" }}
@@ -41,7 +69,7 @@ function PainSection() {
           </span>
           .
         </h3>
-        <p className="w-full text-pretty text-textsizebrandh6 font-normal leading-normal sm:w-[70%]">
+        <p className="w-full text-pretty text-center text-textsizebrandh6 font-normal leading-normal sm:w-[70%]">
           בעלי עסקים משקיעים אלפי שקלים באתר, אבל בסוף נשארים עם משהו יפה שלא
           באמת מביא פניות.
         </p>

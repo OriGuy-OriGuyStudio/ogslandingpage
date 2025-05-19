@@ -55,24 +55,15 @@ export default function Home() {
 
     gsap.to(".heroTitlesContainer", {
       y: "25vh",
-      rotate: "4deg",
+      rotate: "2deg",
       filter: "blur(2px)",
       scale: 0.8,
       scrollTrigger: {
         trigger: ".heroTitlesContainer",
         scrub: true,
-        markers: true,
-        start: "top 20%", // מתחיל רק כשהאלמנט נכנס לתוך הפריים
+        markers: false,
+        start: "top 10%", // מתחיל רק כשהאלמנט נכנס לתוך הפריים
         end: "bottom top", // אופציונלי – קובע מתי לסיים את הסקרוב
-      },
-    });
-    gsap.to(".pain", {
-      scrollTrigger: {
-        trigger: ".pain",
-        pin: true,
-        markers: true,
-        start: "top top",
-        end: "+=1000", // אלמנט יהיה תקוע לאורך 1000px של גלילה
       },
     });
   });
@@ -100,6 +91,7 @@ export default function Home() {
       >
         <main id="smooth-content">
           {/* <GsapTraining /> */}
+
           <HeroSection />
           <PainSection />
           <ProblemSection />

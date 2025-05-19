@@ -74,7 +74,7 @@ function HeroSection({}) {
   });
 
   return (
-    <section className="  relative overflow-x-hidden   h-svh text-colorBrandWhiteYellow100light bg-colorBrandPurple900dark flex flex-col md:items-center justify-center px-4 md:px-20 ">
+    <section className=" hero  relative overflow-x-hidden   h-lvh text-colorBrandWhiteYellow100light bg-colorBrandPurple900dark flex flex-col md:items-center justify-center px-4 md:px-20 ">
       <Image
         src={"/fullLogoWhiteSVG.svg"}
         alt={"logo"}
