@@ -1,8 +1,14 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 
-function CtaPain() {
+interface CtaPainProps {
+  setShowText: Dispatch<SetStateAction<boolean>>;
+}
+
+gsap.registerPlugin(ScrollTrigger);
+function CtaPain({ setShowText }: CtaPainProps) {
   const changingNumRef = useRef<HTMLDivElement | null>(null);
   const [counter, setCounter] = useState<number>(3);
 
@@ -10,7 +16,7 @@ function CtaPain() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".pain",
-        markers: true,
+        markers: false,
         start: "top 50%",
       },
     });
@@ -39,12 +45,18 @@ function CtaPain() {
         opacity: 1,
         delay: 1,
         ease: "elastic",
-        onComplete: () => setCounter((prev: number) => prev - 1),
+        onComplete: () => {
+          setCounter((prev: number) => prev - 1);
+          setShowText(true);
+          setTimeout(() => {
+            setCounter(3);
+          }, 3);
+        },
       });
   });
 
   return (
-    <div className=" ctaPain bg-colorBrandWhiteYellow100light mx-auto  border-colorBrandPink500dark text-colorBrandGray800dark  flex h-fit  flex-col items-center justify-center rounded-tr-[100px] rounded-b-[24px] rounded-tl-[24px] border-4 p-8 text-center leading-none shadow-2xl lg:items-center lg:justify-center lg:text-center">
+    <div className=" ctaPain bg-colorBrandWhiteYellow100light mx-auto z-20 border-colorBrandPink500dark text-colorBrandGray800dark  flex h-fit  flex-col items-center justify-center rounded-tr-[100px] rounded-b-[24px] rounded-tl-[24px] border-4 p-8 text-center leading-none shadow-2xl lg:items-center lg:justify-center lg:text-center">
       <p className="text-textsizebrandh1 text-colorBrandPurple500light font-black">
         אם
       </p>

@@ -6,8 +6,9 @@ import Image from "next/image";
 import { SplitText } from "gsap/all";
 import { useRef, RefObject } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin([ScrollTrigger, ScrambleTextPlugin]);
 
 function HeroSection({}) {
   const tl = useRef(gsap.timeline({ repeat: -1 }));
@@ -26,7 +27,7 @@ function HeroSection({}) {
       {
         opacity: 0,
         y: 100,
-        duration: 1,
+        // duration: 1,
         repeat: 0,
         // ease: "bounce.out",
       },
@@ -34,13 +35,28 @@ function HeroSection({}) {
         opacity: 1,
         y: 0,
         duration: 1.25,
-        ease: "expo.in",
+        ease: "power1",
         stagger: {
           each: 0.25,
         },
       }
     );
-
+    gsap.set(".scrambleText", {
+      fontSize: 32,
+      opacity: 0.75,
+      rotate: "4deg",
+    });
+    gsap.to(".scrambleText", {
+      fontSize: 20,
+      opacity: 1,
+      rotate: 0,
+      scrambleText: {
+        text: "לאתר שלך יש תפקיד אחד!",
+        chars: "$%^^&*(!@#$",
+        speed: 0.1,
+      },
+      duration: 2,
+    });
     tl.current.to(".logo", { rotate: "5deg", duration: 0.5 });
     tl.current.to(".logo", { rotate: "-5deg", duration: 0.5 });
     tl.current.to(".logo", { rotate: "0deg", duration: 0.5 });
@@ -74,7 +90,7 @@ function HeroSection({}) {
   });
 
   return (
-    <section className=" hero  relative overflow-x-hidden   h-lvh text-colorBrandWhiteYellow100light bg-colorBrandPurple900dark flex flex-col md:items-center justify-center px-4 md:px-20 ">
+    <section className=" hero z-20  relative overflow-x-hidden   h-lvh text-colorBrandWhiteYellow100light bg-colorBrandPurple900dark flex flex-col md:items-center justify-center px-4 md:px-20 ">
       <Image
         src={"/fullLogoWhiteSVG.svg"}
         alt={"logo"}
@@ -84,8 +100,8 @@ function HeroSection({}) {
       />
       <BlurBGColors />
       <div className=" heroTitlesContainer flex flex-col md:items-center justify-center">
-        <p className=" titleToStagger  z-10 font-black text-right text-textsizebrandh6">
-          לאתר שלך יש תפקיד אחד:
+        <p className="  scrambleText  z-10 font-black text-right text-textsizebrandh6">
+          {/* לאתר שלך יש תפקיד אחד: */}
         </p>
         <h1
           style={{ textShadow: "1px 4px 8px #2a2a2a" }}

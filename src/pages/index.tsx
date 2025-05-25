@@ -4,7 +4,7 @@ import HeroSection from "@/sections/HeroSection/HeroSection";
 import { gsap } from "gsap";
 import { Physics2DPlugin } from "gsap/Physics2DPlugin";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { JSX, useEffect, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import PainSection from "@/sections/painSection/PainSection";
 import ProblemSection from "@/sections/ProblemSection/ProblemSection";
 import LetsDoItSection from "@/sections/LetsDoItSection/LetsDoItSection";
@@ -13,8 +13,7 @@ import ContactMe from "@/sections/ContactMe/ContactMe";
 import { SplitText } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import GsapTraining from "@/GsapTraining";
-
+import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
 const rubikSans = Rubik({
   variable: "--font-rubik-sans",
   subsets: ["latin"],
@@ -30,15 +29,16 @@ export default function Home() {
       Physics2DPlugin,
       ScrollSmoother,
       ScrollTrigger,
-      SplitText
+      SplitText,
+      ScrambleTextPlugin
     );
 
     // Create the ScrollSmoother instance
     let smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
-      smooth: 2,
-      smoothTouch: 2,
+      smooth: 0.5,
+      smoothTouch: 0.5,
     });
     console.log("scolltrigger init");
     // Clean up on component unmount

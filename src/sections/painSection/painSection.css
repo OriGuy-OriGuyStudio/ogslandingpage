@@ -1,0 +1,30 @@
+@initial {
+  .showTextOnCountdown {
+    opacity: 0;
+  }
+}
+/* .showTextOnCountdown {
+  opacity: 0;
+  display: none;
+  transition-property: opacity display;
+  transition-duration: 1s;
+  transition-behavior: allow-discrete;
+} */
+.showTextOnCountdown {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.72s ease, max-height 1.2s ease;
+}
+.displayText {
+  opacity: 1;
+  max-height: 1000px; /* גובה גדול מספיק כדי להכיל את כל הטקסט */
+}
+
+.displayText.showTextOnCountdown {
+  opacity: 1;
+  display: flex;
+  @starting-style {
+    opacity: 0;
+  }
+}
