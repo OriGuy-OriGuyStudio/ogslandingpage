@@ -23,7 +23,7 @@ function ProblemSection() {
           start: "top top",
           end: "bottom bottom",
           pin: ".areaToPin",
-          markers: true,
+          markers: false,
           pinType: "transform",
         });
         ScrollTrigger.create({

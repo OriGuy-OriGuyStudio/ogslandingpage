@@ -1,10 +1,28 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Braces, Handshake, Target } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-
+gsap.registerPlugin(ScrollTrigger);
 function LetsDoItSection() {
+  useGSAP(() => {
+    gsap.from(".letsDoItTitle", {
+      scale: 2.3,
+      rotate: "10deg",
+      opacity: 0,
+      scrollTrigger: {
+        trigger: ".letsDoItSection",
+        pin: true,
+        start: "top top", // Start animation when section hits the top
+        end: "+=600", // Increase this value for a longer scroll range
+        scrub: 1.5, // Value between 0.5-1.5 for smoother animation (higher = smoother)
+        markers: true,
+      },
+    });
+  });
   return (
-    <section className="  relative overflow-x-hidden grid-rows-2 lg:grid-cols-12 lg:grid-rows-2 lg:items-stretch   h-svh text-colorBrandGray800dark bg-colorBrandGreen500medium grid grid-cols-4 place-content-center px-4 md:px-20 ">
+    <section className=" letsDoItSection relative no-scrollbar overflow-x-hidden grid-rows-2 lg:grid-cols-12 lg:grid-rows-2 lg:items-stretch   h-svh text-colorBrandGray800dark bg-colorBrandGreen500medium grid grid-cols-4 place-content-center px-4 md:px-20 ">
       <Image
         src={"/greenCT2.png"}
         alt={"upRight"}
@@ -13,7 +31,7 @@ function LetsDoItSection() {
         className="pointer-events-none absolute w-full z-10  top-0   place-self-center "
         // style={{ top: '-100px' }}
       />
-      <div className="items-right col-span-4 lg:col-span-full z-10 mb-2 flex flex-col justify-end text-right lg:items-center lg:text-center">
+      <div className=" letsDoItTitle items-right col-span-4 lg:col-span-full z-10 mb-2 flex flex-col justify-end text-right lg:items-center lg:text-center">
         <h3 className="text-textsizebrandh1 font-black leading-none ">
           הגיע הזמן לעשות
         </h3>
@@ -60,7 +78,7 @@ function LetsDoItSection() {
           ומעודד לקוחות לפנות דווקא אליכם.
         </p>
       </div> */}
-      <div className="leading-none z-10 flex flex-col items-start lg:items-center text-right lg:text-center col-span-12 mt-4 lg:w-2/4 lg:mx-auto">
+      {/* <div className="leading-none z-10 flex flex-col items-start lg:items-center text-right lg:text-center col-span-12 mt-4 lg:w-2/4 lg:mx-auto">
         <Handshake
           className="inline-block size-[32px] mb-1 lg:size-[40px]"
           color="#f55274"
@@ -80,7 +98,7 @@ function LetsDoItSection() {
             בואו נעשה את זה כמו שצריך
           </button>
         </a>
-      </div>
+      </div> */}
     </section>
   );
 }
