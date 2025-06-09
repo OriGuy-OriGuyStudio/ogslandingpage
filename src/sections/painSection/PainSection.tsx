@@ -53,7 +53,7 @@ function PainSection() {
     // gsap.to(textRef.current, {
     //   scrollTrigger: {
     //     trigger: ".pain",
-    //     markers: true,
+    //     markers: false,
     //     start: "top 50%",
     //     onEnter: () => {
     //       gsap.to(textRef.current, {
@@ -72,7 +72,7 @@ function PainSection() {
     // gsap.to(textRef.current, {
     //   scrollTrigger: {
     //     trigger: ".pain",
-    //     markers: true,
+    //     markers: false,
     //     start: "top 50%",
     //     onEnter: () => {
     //       gsap.to(textRef.current, {

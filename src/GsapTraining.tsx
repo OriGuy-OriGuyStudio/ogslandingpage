@@ -137,7 +137,7 @@ function GsapTraining() {
           trigger: ".one",
           start: "top 80%",
           toggleActions: "play none none none",
-          markers: true,
+          markers: false,
         },
       });
       gsap.from(".two", {
@@ -149,7 +149,7 @@ function GsapTraining() {
           trigger: ".two",
           start: "top 80%",
           toggleActions: "play none none none",
-          markers: true,
+          markers: false,
         },
       });
       gsap.from(".three", {
@@ -161,7 +161,7 @@ function GsapTraining() {
           trigger: ".three",
           start: "top 80%",
           toggleActions: "play none none none",
-          markers: true,
+          markers: false,
         },
       });
       gsap.from(".four", {
@@ -173,7 +173,7 @@ function GsapTraining() {
           trigger: ".four",
           start: "top 80%",
           toggleActions: "play none none none",
-          markers: true,
+          markers: false,
         },
       });
     },
@@ -187,7 +187,7 @@ function GsapTraining() {
       scrollTrigger: {
         scrub: true,
         trigger: ".imageToScaleContainer",
-        markers: true,
+        markers: false,
         start: "top 80%",
         end: "bottom 50%",
       },
