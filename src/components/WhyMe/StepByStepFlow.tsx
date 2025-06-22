@@ -1,3 +1,5 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import {
   Code,
   ListTodo,
@@ -6,6 +8,7 @@ import {
   SplinePointer,
   StepForward,
 } from "lucide-react";
+
 import React from "react";
 interface StepProps {
   icon: any;
@@ -15,6 +18,40 @@ interface StepProps {
   text: string;
 }
 function StepByStepFlow() {
+  useGSAP(() => {
+    gsap.utils.toArray(".stepByStepFlowCard").forEach((card, index) => {
+      gsap.from(card as Element, {
+        y: -100,
+        opacity: 0,
+        duration: 0.8,
+        ease: "sine.out",
+        scrollTrigger: {
+          trigger: card as Element,
+          start: "top 50%",
+          end: "bottom 100%",
+          scrub: 1,
+        },
+        delay: index * 0.2,
+      });
+    });
+    gsap.set(".stepIcon", {
+      opacity: 0,
+    });
+
+    gsap.utils.toArray(".stepIcon").forEach((icon) => {
+      gsap.to(icon as Element, {
+        opacity: 1,
+        rotate: "90deg",
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: icon as Element,
+          start: "top 50%", // Start animation when card is 80% in view
+          end: "top 100%",
+          scrub: 1,
+        },
+      });
+    });
+  });
   const data: StepProps[] = [
     {
       icon: <PhoneCall className="size-10 md:size-10 lg:size-16" />,
@@ -57,7 +94,7 @@ function StepByStepFlow() {
       {data.map((item, index) => {
         return (
           <React.Fragment key={index}>
-            <div className="border-1 flex flex-col gap-4 rounded-2xl border-colorBrandPurple500light px-8 py-10 shadow-sm shadow-colorBrandPurple500light col-span-full lg:col-start-2 lg:col-span-10">
+            <div className=" stepByStepFlowCard border-1 flex flex-col gap-4 rounded-2xl border-colorBrandPurple500light px-8 py-10 shadow-sm shadow-colorBrandPurple500light col-span-full lg:col-start-2 lg:col-span-10">
               <div className="flex flex-col items-start gap-4 lg:flex-row lg:items-center">
                 <span className="inline-block">{item.icon}</span>
                 <div className="font-black leading-none">
@@ -75,7 +112,7 @@ function StepByStepFlow() {
               </div>
             </div>
             {index < data.length - 1 && (
-              <span className="col-span-full">
+              <span className="col-span-full stepIcon inline-block">
                 <StepForward className="size-16 text-colorBrandPink500dark lg:size-16 " />
               </span>
             )}

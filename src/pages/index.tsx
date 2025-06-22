@@ -52,20 +52,6 @@ export default function Home() {
     gsap.set(".heroTitlesContainer", {
       rotate: 0,
     });
-
-    gsap.to(".heroTitlesContainer", {
-      y: "25vh",
-      rotate: "2deg",
-      filter: "blur(2px)",
-      scale: 0.8,
-      scrollTrigger: {
-        trigger: ".heroTitlesContainer",
-        scrub: true,
-        markers: false,
-        start: "top 10%", // מתחיל רק כשהאלמנט נכנס לתוך הפריים
-        end: "bottom top", // אופציונלי – קובע מתי לסיים את הסקרוב
-      },
-    });
   });
 
   return (

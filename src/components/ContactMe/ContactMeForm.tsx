@@ -47,7 +47,7 @@ function ContactMeForm() {
         className="flex w-full flex-col gap-4"
         onSubmit={formik.handleSubmit}
       >
-        <div className="flex flex-col items-start justify-start gap-2 text-right">
+        <div className="contactMeAnimate flex flex-col items-start justify-start gap-2 text-right">
           <label
             className="text-textsizebrandh6 font-extrabold"
             htmlFor="text"
@@ -71,7 +71,7 @@ function ContactMeForm() {
           ) : null}
         </div>
 
-        <div className="flex flex-col items-start justify-start gap-2 text-right">
+        <div className="contactMeAnimate flex flex-col items-start justify-start gap-2 text-right">
           <label
             className="text-textsizebrandh6 font-extrabold"
             htmlFor="tel"
@@ -94,7 +94,7 @@ function ContactMeForm() {
             </div>
           ) : null}
         </div>
-        <div className="flex flex-col items-start justify-start gap-2 text-right">
+        <div className="contactMeAnimate flex flex-col items-start justify-start gap-2 text-right">
           <label
             className="text-textsizebrandp font-extrabold"
             htmlFor="email"
@@ -119,7 +119,7 @@ function ContactMeForm() {
         </div>
 
         <button
-          className="mt-4 flex w-2/4 flex-row items-center justify-center gap-2 rounded-xl bg-colorBrandPink500dark px-2 py-2 text-textsizebrandh6 font-black lg:w-2/4"
+          className="contactMeAnimate mt-4 flex w-2/4 flex-row items-center justify-center gap-2 rounded-xl bg-colorBrandPink500dark px-2 py-2 text-textsizebrandh6 font-black lg:w-2/4"
           type="submit"
         >
           אורי, דבר איתי{" "}

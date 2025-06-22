@@ -12,85 +12,103 @@ gsap.registerPlugin([ScrollTrigger, ScrambleTextPlugin]);
 
 function HeroSection({}) {
   const tl = useRef(gsap.timeline({ repeat: -1 }));
+  const heroRef = useRef<HTMLElement | null>(null);
   const charsTl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
 
   const searchWordSplitRef = useRef<SplitText | null>(null);
 
-  useGSAP(() => {
-    // Create SplitText instance inside useGSAP to ensure DOM is ready
-    const searchWordSplit = SplitText.create(".searchWord", { type: "chars" });
-    searchWordSplitRef.current = searchWordSplit;
-    const chars = searchWordSplit.chars;
+  useGSAP(
+    () => {
+      // Create SplitText instance inside useGSAP to ensure DOM is ready
+      const searchWordSplit = SplitText.create(".searchWord", {
+        type: "chars",
+      });
+      searchWordSplitRef.current = searchWordSplit;
+      const chars = searchWordSplit.chars;
 
-    gsap.fromTo(
-      ".titleToStagger",
-      {
-        opacity: 0,
-        y: 100,
-        // duration: 1,
-        repeat: 0,
-        // ease: "bounce.out",
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.25,
-        ease: "power1",
-        stagger: {
-          each: 0.25,
-        },
-      }
-    );
-    gsap.set(".scrambleText", {
-      fontSize: 32,
-      opacity: 0.75,
-      rotate: "4deg",
-    });
-    gsap.to(".scrambleText", {
-      fontSize: 20,
-      opacity: 1,
-      rotate: 0,
-      scrambleText: {
-        text: "לאתר שלך יש תפקיד אחד!",
-        chars: "$%^^&*(!@#$",
-        speed: 0.1,
-      },
-      duration: 2,
-    });
-    tl.current.to(".logo", { rotate: "5deg", duration: 0.5 });
-    tl.current.to(".logo", { rotate: "-5deg", duration: 0.5 });
-    tl.current.to(".logo", { rotate: "0deg", duration: 0.5 });
-    tl.current.to(".logo", { scale: 1.1, duration: 0.5 });
-    tl.current.to(".logo", { scale: 1, duration: 0.5 });
-
-    chars.forEach((char, index) => {
-      charsTl.to(
-        char,
+      gsap.fromTo(
+        ".titleToStagger",
         {
-          scale: 1.4,
-          y: -10,
-          // duration: 0.5,
-          // ease: "power2.in",
+          opacity: 0,
+          y: 100,
         },
-        index * 0.1
-      ); // Delay each character's animation start
-
-      charsTl.to(
-        char,
         {
-          scale: 1,
+          opacity: 1,
           y: 0,
-          color: "",
-          duration: 0.5,
-          // ease: "power1.out",
+          // duration: 1.25,
+          ease: "power1",
+          stagger: {
+            each: 0.25,
+          },
+        }
+      );
+      // gsap.set(".scrambleText", {
+      //   fontSize: 32,
+      //   opacity: 0.75,
+      //   rotate: "4deg",
+      // });
+      // gsap.to(".scrambleText", {
+      //   fontSize: 20,
+      //   opacity: 1,
+      //   rotate: 0,
+      //   scrambleText: {
+      //     text: "לאתר שלך יש תפקיד אחד!",
+      //     chars: "$%^^&*(!@#$",
+      //     speed: 0.1,
+      //   },
+      //   duration: 2,
+      // });
+      tl.current.to(".logo", { rotate: "5deg", duration: 0.5 });
+      tl.current.to(".logo", { rotate: "-5deg", duration: 0.5 });
+      tl.current.to(".logo", { rotate: "0deg", duration: 0.5 });
+      tl.current.to(".logo", { scale: 1.1, duration: 0.5 });
+      tl.current.to(".logo", { scale: 1, duration: 0.5 });
+
+      chars.forEach((char, index) => {
+        charsTl.to(
+          char,
+          {
+            scale: 1.4,
+            y: -10,
+          },
+          index * 0.1
+        );
+
+        charsTl.to(
+          char,
+          {
+            scale: 1,
+            y: 0,
+            color: "",
+            duration: 0.5,
+            // ease: "power1.out",
+          },
+          index * 0.1 + 0.2
+        );
+      });
+      gsap.to(".heroTitlesContainer", {
+        y: "25vh",
+        // rotate: "2deg",
+        // filter: "blur(2px)",
+        // scale: 1.1,
+        scrollTrigger: {
+          trigger: ".heroTitlesContainer",
+          scrub: true,
+          markers: true,
+          start: "top top", // מתחיל רק כשהאלמנט נכנס לתוך הפריים
+          end: "bottom top", // אופציונלי – קובע מתי לסיים את הסקרוב
         },
-        index * 0.1 + 0.2
-      ); // Return to original state before moving to next char
-    });
-  });
+        // ease: "expo",
+      });
+    },
+    { scope: heroRef }
+  );
 
   return (
-    <section className=" hero z-20  relative overflow-x-hidden   h-lvh text-colorBrandWhiteYellow100light bg-colorBrandPurple900dark flex flex-col md:items-center justify-center px-4 md:px-20 ">
+    <section
+      ref={heroRef}
+      className=" hero z-20  relative overflow-x-hidden   h-lvh text-colorBrandWhiteYellow100light bg-colorBrandPurple900dark flex flex-col md:items-center justify-center px-4 md:px-20 "
+    >
       <Image
         src={"/fullLogoWhiteSVG.svg"}
         alt={"logo"}
@@ -100,8 +118,8 @@ function HeroSection({}) {
       />
       <BlurBGColors />
       <div className=" heroTitlesContainer flex flex-col md:items-center justify-center">
-        <p className="  scrambleText  z-10 font-black text-right text-textsizebrandh6">
-          {/* לאתר שלך יש תפקיד אחד: */}
+        <p className="  titleToStagger  z-10 font-black text-right text-textsizebrandh6">
+          לאתר שלך יש תפקיד אחד!
         </p>
         <h1
           style={{ textShadow: "1px 4px 8px #2a2a2a" }}
